@@ -1704,6 +1704,9 @@
       "ignore": true
     },
     "repository": {
+      "cDependencies": [
+        "git2/sys/repository.h"
+      ],
       "functions": {
         "git_repository__cleanup": {
           "ignore": true
@@ -1754,7 +1757,13 @@
           }
         },
         "git_repository_set_index": {
-          "ignore": true
+          "args": {
+            "repo": {
+            },
+            "index": {
+              "isOptional": true
+            }
+          }
         },
         "git_repository_set_odb": {
           "ignore": true
