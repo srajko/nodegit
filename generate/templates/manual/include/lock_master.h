@@ -122,6 +122,12 @@ template<> inline void LockMaster::AddLocks(const git_commit *commit) {
   ObjectToLock(owner);
 }
 
+template<> inline void LockMaster::AddLocks(const git_remote *commit) {
+  // when using a remote, lock the repo
+  const void *owner = git_remote_owner(commit);
+  ObjectToLock(owner);
+}
+
 // ... more locking rules would go here.  According to an analysis of idefs.json,
 // the following types are passed as non-const * and may require locking
 // (some likely, some probably not):
