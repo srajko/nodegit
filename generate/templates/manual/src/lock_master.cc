@@ -65,7 +65,9 @@ public:
   }
 
   void ObjectToLock(const void *objectToLock) {
-    objectsToLock.insert(objectToLock);
+    if (objectToLock) {
+      objectsToLock.insert(objectToLock);      
+    }
   }
 
   void Lock(bool acquireMutexes);
