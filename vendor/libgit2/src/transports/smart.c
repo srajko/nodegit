@@ -42,9 +42,14 @@ GIT_INLINE(int) git_smart__reset_stream(transport_smart *t, bool close_subtransp
 		t->current_stream = NULL;
 	}
 
+	printf("close_subtransport && t->wrapped->close(t->wrapped)\n");
 	if (close_subtransport &&
-		t->wrapped->close(t->wrapped) < 0)
+		t->wrapped->close(t->wrapped) < 0) {
+		printf("after (in if) close_subtransport && t->wrapped->close(t->wrapped)\n");
+
 		return -1;
+	}
+	printf("after (not in if) close_subtransport && t->wrapped->close(t->wrapped)\n");
 
 	return 0;
 }
@@ -326,7 +331,9 @@ static int git_smart__close(git_transport *transport)
 		t->current_stream->write(t->current_stream, flush, 4);
 	}
 
+	printf("before git_smart__reset_stream(t, true)\n");
 	ret = git_smart__reset_stream(t, true);
+	printf("after git_smart__reset_stream(t, true)\n");
 
 	git_vector_foreach(common, i, p)
 		git_pkt_free(p);

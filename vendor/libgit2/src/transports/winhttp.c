@@ -1305,7 +1305,9 @@ static int winhttp_close(git_smart_subtransport *subtransport)
 	memset(&t->connection_data, 0x0, sizeof(gitno_connection_data));
 
 	if (t->cred) {
+		printf("before t->cred->free(t->cred)\n");
 		t->cred->free(t->cred);
+		printf("after t->cred->free(t->cred)\n");
 		t->cred = NULL;
 	}
 
