@@ -23,7 +23,6 @@
       "dependencies": [
         "zlib",
         "http_parser/http_parser.gyp:http_parser",
-        "openssl/openssl.gyp:openssl",
         "libssh2"
       ],
       "sources": [
