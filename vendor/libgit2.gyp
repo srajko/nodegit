@@ -471,9 +471,6 @@
         ".",
         "libssh2/include",
       ],
-      "dependencies": [
-        "openssl/openssl.gyp:openssl"
-      ],
       "direct_dependent_settings": {
         "include_dirs": [
           "libssh2/include"
