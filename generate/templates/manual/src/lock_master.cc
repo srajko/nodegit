@@ -89,7 +89,7 @@ NAN_GC_CALLBACK(LockMasterImpl::CleanupMutexes) {
   // this means that turning thread safety on and then off
   // could result in remaining mutexes - but they would get cleaned up
   // if thread safety is turned on again
-  if (!LockMaster::IsEnabled()) {
+  if (LockMaster::GetStatus() == LockMaster::Disabled) {
     return;
   }
 
