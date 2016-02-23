@@ -15,6 +15,7 @@
 #include "../include/wrapper.h"
 #include "../include/promise_completion.h"
 #include "../include/functions/copy.h"
+#include "../include/thread_pool.h"
 {% each %}
   {% if type != "enum" %}
     #include "../include/{{ filename }}.h"
@@ -69,6 +70,7 @@ void OpenSSL_ThreadSetup() {
   CRYPTO_set_id_callback(OpenSSL_IDCallback);
 }
 
+void spawn_thread_loop();
 void run_libgit2_event_queue(void *);
 
 extern "C" void init(Local<v8::Object> target) {
@@ -88,14 +90,8 @@ extern "C" void init(Local<v8::Object> target) {
     {% endif %}
   {% endeach %}
 
-  // initialize a thread on which we will execute all libgit2 calls
-  // for async NodeGit wrappers (and sync ones, eventually)
-  libgit2_loop = (uv_loop_t *)malloc(sizeof(uv_loop_t));
-  uv_loop_init(libgit2_loop);
+  initialize_thread_pool();
 
-  uv_thread_t libgit2_thread_id;
-  uv_thread_create(&libgit2_thread_id, run_libgit2_event_queue, NULL);
-  
   ConvenientHunk::InitializeComponent(target);
   ConvenientPatch::InitializeComponent(target);
 
@@ -108,17 +104,3 @@ extern "C" void init(Local<v8::Object> target) {
 }
 
 NODE_MODULE(nodegit, init)
-
-uv_loop_t *libgit2_loop;
-
-void run_libgit2_event_queue(void *)
-{
-  // run, CPU, run
-  for ( ; ; ) {
-    uv_run(libgit2_loop, UV_RUN_DEFAULT);
-    // TODO: break out of loop
-  }
-
-  uv_loop_close(libgit2_loop);
-  free(libgit2_loop);
-}
