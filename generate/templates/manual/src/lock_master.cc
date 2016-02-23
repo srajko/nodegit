@@ -66,7 +66,7 @@ public:
 
   void ObjectToLock(const void *objectToLock) {
     if (objectToLock) {
-      objectsToLock.insert(objectToLock);      
+      objectsToLock.insert(objectToLock);
     }
   }
 
@@ -245,4 +245,4 @@ void LockMaster::TemporaryUnlock::DestructorImpl() {
   impl->Lock(false);
 }
 
-bool LockMaster::enabled = false;
+LockMaster::Status LockMaster::status = LockMaster::Disabled;
