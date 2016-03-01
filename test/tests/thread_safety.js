@@ -2,7 +2,7 @@ var assert = require("assert");
 var path = require("path");
 var local = path.join.bind(path, __dirname);
 
-describe.only("ThreadSafety", function() {
+describe("ThreadSafety", function() {
   var NodeGit = require("../../");
   var Repository = NodeGit.Repository;
 
