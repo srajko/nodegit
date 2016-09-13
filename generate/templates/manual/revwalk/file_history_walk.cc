@@ -247,9 +247,9 @@ void GitRevwalk::FileHistoryWalkWorker::Execute()
       delete baton->out;
 
       baton->out = NULL;
+    } else {
+      baton->error_code = GIT_OK;
     }
-  } else {
-    baton->error_code = GIT_OK;
   }
 }
 
