@@ -601,6 +601,10 @@
             {
               "type": "void *",
               "name": "payload"
+            },
+            {
+              "type": "git_push_update_reference_cb",
+              "name": "push_update_reference"
             }
           ],
           "used": {
