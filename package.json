@@ -21,7 +21,7 @@
       "email": "maxkorp@8bytealchemy.com"
     }
   ],
-  "main": "dist/nodegit.js",
+  "main": "lib/nodegit.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/nodegit/nodegit.git"
