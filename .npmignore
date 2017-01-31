@@ -1,7 +1,6 @@
 /.travis/
 /build/
 /examples/
-/generate/
 /guides/
 /lib/
 /test/
